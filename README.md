@@ -5,6 +5,6 @@ This is the official repository to the paper **"Optimized indicators for ultra-f
 
 ## Source Code
 
-1) Add_Color_Spaces_testing.py - Training models with additional channels from HSV and Lab color spaces
+1) add_color_spaces_testing.py - Training models with additional channels from HSV and Lab color spaces
 2) 
 
