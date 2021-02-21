@@ -3,7 +3,8 @@ This is the official repository to the paper **"Optimized indicators for ultra-f
 
 ## Data
 
-Datasets  are available under the link .
+Datasets are available under the link https://drive.google.com/drive/folders/13ZJbOUWGAEkRtd9LJnYEJrmyercfWyOq?usp=sharing.
+Put data folder in the same location as *.py files
 
 ## Source Code
 
