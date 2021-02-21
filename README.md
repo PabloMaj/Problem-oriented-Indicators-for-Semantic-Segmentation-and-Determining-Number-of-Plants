@@ -1,6 +1,8 @@
 ## Optimized indicators for ultra-fast semantic segmentation and celery counting
 This is the official repository to the paper **"Optimized indicators for ultra-fast semantic segmentation and celery counting"** by Paweł Majewski and Jacek Reiner.
 
+![alt text](https://github.com/PabloMaj/Optimized-indicators-for-ultra-fast-semantic-segmentation-and-celery-counting/Diff_indicators_comparision.png)
+
 ## Data
 
 Datasets are available under the link https://drive.google.com/drive/folders/13ZJbOUWGAEkRtd9LJnYEJrmyercfWyOq?usp=sharing.
