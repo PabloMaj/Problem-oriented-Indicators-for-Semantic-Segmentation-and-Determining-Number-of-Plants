@@ -7,6 +7,6 @@ Datasets  are available under the link .
 
 ## Source Code
 
-1) add_color_spaces_testing.py - Training models with additional channels from HSV and Lab color spaces
+1) *add_color_spaces_testing.py* - Training models with additional channels from HSV and Lab color spaces
 2) 
 
