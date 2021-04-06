@@ -1,5 +1,5 @@
-## Optimatization of Problem-oriented Indicators for Semantic Segmentation and Determining Number of Plants
-This is the official repository to the paper **"Optimatization of Problem-oriented Indicators for Semantic Segmentation and Determining Number of Plants"** by Paweł Majewski and Jacek Reiner.
+## Problem-oriented Indicators for Semantic Segmentation and Determining Number of Plants
+This is the official repository to the paper **"Problem-oriented Indicators for Semantic Segmentation and Determining Number of Plants"** by Paweł Majewski and Jacek Reiner.
 
 ![](Diff_indicators_comparision.png)
 
