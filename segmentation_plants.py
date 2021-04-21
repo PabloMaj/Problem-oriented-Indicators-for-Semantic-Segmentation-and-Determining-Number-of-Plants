@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 from utilities import calculate_optimal_threshold, calculate_VI_RGB, calculate_VI_fraction, read_data
 from sklearn.metrics import f1_score
@@ -167,7 +168,7 @@ for date in dates:
 
     start_training_time = time.time()
 
-    n_iterations = 50
+    n_iterations = 20
     n_particles = 30
     search_space = Space(n_particles, X_train[date], Y_train[date])
     particles_vector = [Particle() for _ in range(search_space.n_particles)]
@@ -217,3 +218,31 @@ for date in dates:
     results_segmentation.write(
         f"{date}\tfraction\t{F1_score}\t{training_time}\t{inference_time}\t{use_morphological_operation}\n")
     results_segmentation.close()
+
+# visualization
+df_results = pd.read_csv("Results_segmentation.txt", sep="\t")
+
+markers = ["x", "x", "x"]
+mask_scores = [0.7770, 0.7605, 0.8413]
+width = 0.2
+
+plt.figure(figsize=(10, 5))
+for counter, date in enumerate(dates):
+    df_filtered = df_results[df_results["date"] == date]
+    x = list(df_filtered["clf_type"])
+    y = list(df_filtered["F1_score"])
+    x = x[:3] + x[10:11] + x[3:10] + x[11:12]
+    y = y[:3] + y[10:11] + y[3:10] + y[11:12]
+    x[3] = "Optimised\nlinear"
+    x[11] = "Optimised\nfraction"
+    x += ["Mask\nR-CNN"]
+    y += [mask_scores[counter]]
+    # plt.scatter(x, y, marker=markers[counter], s=13**2, zorder=3)
+    plt.bar(x=np.arange(len(x)) + (counter - 1) * width, height=y, width=width, zorder=3, edgecolor="k")
+    plt.ylim(0.58, 0.85)
+    plt.xticks(np.arange(len(x)), x)
+plt.ylabel("F1-score")
+plt.legend(["flowering", "mature", "before harvest"], loc="lower right", framealpha=1)
+plt.grid(zorder=0)
+plt.tight_layout()
+plt.savefig("Segmentation_results.png", dpi=300)
