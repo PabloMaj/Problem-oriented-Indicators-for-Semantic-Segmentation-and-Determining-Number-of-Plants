@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 from sklearn.metrics import f1_score
 from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import LogisticRegression
@@ -9,7 +10,6 @@ from utilities import calculate_optimal_threshold
 path_to_data = "data//Segmentation//"
 dates = ["2019_07_25", "2019_09_20", "2019_10_11"]
 test_other_models = False
-
 
 for date in dates:
 
@@ -80,3 +80,24 @@ for date in dates:
             print(f"F1_test:{np.round(F1_test, 4)}")
             print(f"Threshold_opt:{np.round(threshold_opt, 4)}")
             print("--------------")
+
+# visualization
+labels = ["RGB", "Lab", "HSV", "RGB+Lab", "RGB+HSV", "Lab+HSV", "RGB+HSV+\nLab"]
+x = np.arange(len(labels[1:]))
+width = 0.2
+y = dict()
+y["2019_07_25"] = [0.8011, 0.8003, 0.7491, 0.8013, 0.8047, 0.8050, 0.8038]
+y["2019_09_20"] = [0.7534, 0.7562, 0.7248, 0.7546, 0.7505, 0.7566, 0.7550]
+y["2019_10_11"] = [0.8374, 0.8342, 0.7757, 0.8332, 0.8264, 0.8327, 0.8294]
+for date in dates:
+    y[date] = [el - y[date][0] for el in y[date][1:]]
+fig, ax = plt.subplots(figsize=(10, 5))
+rects1 = ax.bar(x - width, y["2019_07_25"], width, label='flowering', zorder=3, edgecolor="k")
+rects2 = ax.bar(x, y["2019_09_20"], width, label='before harvest', zorder=3, edgecolor="k")
+rects3 = ax.bar(x + width, y["2019_10_11"], width, label='before harvest', zorder=3, edgecolor="k")
+ax.set_xticks(x)
+ax.set_xticklabels(labels[1:])
+plt.grid(zorder=0)
+plt.legend(["flowering", "mature", "before harvest"], loc="lower right", framealpha=1)
+plt.ylabel("Change of F1-score compared to RGB")
+plt.savefig("Add_color_spaces_testing.png", dpi=300)
