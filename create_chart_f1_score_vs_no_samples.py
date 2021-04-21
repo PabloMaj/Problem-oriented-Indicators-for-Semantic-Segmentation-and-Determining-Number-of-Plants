@@ -30,9 +30,13 @@ for version in ['linear', 'fraction']:
         plt.plot(x, y_mean, color=colors[counter])
         plt.fill_between(x, y_mean - y_std, y_mean + y_std, color=colors[counter], alpha=0.2)
     plt.grid()
-    plt.title(f"{version[0].upper()}{version[1:]} model type")
-    plt.legend(dates, loc="lower right")
-    plt.xlabel("Number of labeled samples")
+    if version == "linear":
+        plt.title("Optimised linear indicator")
+    elif version == "fraction":
+        plt.title("Optimised fraction indicator")
+    plt.legend(["flowering", "mature", "before harvest"], loc="lower right")
+    plt.xlabel("Number of labelled samples")
     plt.ylabel("F1-score")
+    plt.xlim(1, 200)
     plt.savefig(f"f1_score_vs_no_samples_{version}.png", dpi=300)
     # plt.show()
