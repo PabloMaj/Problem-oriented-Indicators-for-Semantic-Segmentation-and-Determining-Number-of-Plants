@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap, LinearSegmentedColormap
 from skimage.morphology import binary_erosion, remove_small_objects, remove_small_holes
 from opt_parameters import clf, min_plant_size
-plt.rcParams.update({'font.size': 14})
+plt.rcParams.update({'font.size': 18})
 
 def read_data(dates=None, path_to_data="data//", x_start=None, y_start=None, crop_size=None):
 
@@ -37,6 +37,7 @@ def read_data(dates=None, path_to_data="data//", x_start=None, y_start=None, cro
     return bands_test, ground_truth_test
 
 dates = ['2019_07_25', '2019_09_20', '2019_10_11']
+labels = ["flowering", "mature", "before harvest"]
 cmap = ListedColormap(["lawngreen", "forestgreen", "red", "darkorange"])
 clf_types = ['ExG', 'Linear', 'VDVI', 'Fraction', 'Mask_RCNN']
 x_start = 30
@@ -100,11 +101,12 @@ for row in range(3):
         axs[row, col].imshow(output_images[row][col], cmap=cmap)
 
         if col == 0:
-            axs[row, col].set(ylabel=dates[row])
+            axs[row, col].set(ylabel=labels[row])
 
         list_clf_names = ["RGB"] + clf_types
-        list_clf_names[2] = "Optimized Linear"
-        list_clf_names[4] = "Optimized Fraction"
+        list_clf_names[2] = "Optimised linear"
+        list_clf_names[4] = "Optimised fraction"
+        list_clf_names[5] = "Mask R-CNN"
 
         if row == 0:
             axs[row, col].set_title(list_clf_names[col])
@@ -112,3 +114,16 @@ for row in range(3):
 plt.tight_layout()
 # plt.show()
 plt.savefig("Diff_indicators_comparision.png", dpi=300)
+
+"""
+plt.rcParams.update({'font.size': 24})
+fig, axs = plt.subplots(nrows=1, ncols=3, figsize=(16, 8), subplot_kw={'xticks': [], 'yticks': []})
+axs[0].imshow(bands_test['2019_07_25']["RGB"])
+axs[1].imshow(bands_test['2019_09_20']["RGB"])
+axs[2].imshow(bands_test['2019_10_11']["RGB"])
+axs[0].set_title('flowering')
+axs[1].set_title('mature')
+axs[2].set_title('before harvest')
+plt.tight_layout()
+plt.savefig("Celery_data.png", dpi=300)
+"""
